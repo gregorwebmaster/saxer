@@ -1,0 +1,11 @@
+/**a
+*
+* @TODO creare new db, update settings & migrate.
+*
+* @TODO create tabele projects_metatags for meta tags witch columns: property && content
+*
+* @TODO creatae table projectmetatags_category id, name + seed
+*
+* @TODO create pivot users_roles for settings global user permission
+*
+* @TODO create sites_types tabele ??? controllers ???? for: single, archiwum, collections, gallery(media)
