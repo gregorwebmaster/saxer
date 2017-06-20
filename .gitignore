@@ -1,2 +1,4 @@
+.env
+/public/storage
 /node_modules
 /.idea
