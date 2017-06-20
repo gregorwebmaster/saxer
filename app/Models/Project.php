@@ -11,6 +11,12 @@ class Project extends Model
         'name', 'description', 'domain', 'rwd_template', 'enabled', 'master_id', 'owner_id'
     ];
 
+
+    public function servicesId()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
     public static function hostToProject($host)
     {
         try {
