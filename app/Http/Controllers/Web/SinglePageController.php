@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Models\Web\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Route;
+use Mockery\Exception;
+
 
 class SinglePageController extends Controller
 {
