@@ -29,7 +29,6 @@ if (Config::get('custom.project')) {
 } else {
     $site_routes =  FALSE;
 }
-
 if ($site_routes) {
     checkRoutes($site_routes);
 }
@@ -45,11 +44,11 @@ function checkRoutes ($routes_array, $not_found = FALSE) {
         for ($i = 0; $i < count($routes_array); $i++) {
             if ($routes_array[$i]['controller'] == 'singlepage') {
                 Route::get($routes_array[$i]['path'], function () {
-                    return \App\Http\Controllers\Web\SinglepageController::index(request()->id, request()->view, request()->slug);
+                    return \App\Http\Controllers\Web\SinglepageController::index(request()->id, request()->slug);
                 })->name($routes_array[$i]['view']);
             } elseif ($routes_array[$i]['controller'] == 'collection') {
                 Route::get($routes_array[$i]['path'], function () {
-                    return \App\Http\Controllers\Web\CollectionController::index(request()->id, request()->view, request()->colection);
+                    return \App\Http\Controllers\Web\CollectionController::index(request()->id, request()->colection);
                 })->name($routes_array[$i]['view']);
             } elseif ($routes_array[$i]['controller'] == '' && $routes_array[$i]['view'] !='') {
                 Route::get($routes_array[$i]['path'], function () {

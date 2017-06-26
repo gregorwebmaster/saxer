@@ -24,12 +24,12 @@ class SinglePageController extends Controller
             }
 
         } else if ($slug){
-//            $site = self::findSiteWithId($id);
-//            if ($site) {
-//                $template = self::getTemplate($site->view);
-//            } else {
-//                $template = null;
-//            }
+            $site = self::findSiteWithSlug($slug);
+            if ($site) {
+                $template = self::getTemplate($site->view);
+            } else {
+                $template = null;
+            }
         } else if (Route::currentRouteName()){
             $site = self::findSiteWithId(Route::currentRouteName());
             $template = self::getTemplate(Route::currentRouteName());
@@ -71,11 +71,11 @@ class SinglePageController extends Controller
         return $site;
     }
 
-    private static function findSiteWithView($view =null)
+    private static function findSiteWithSlug($slug =null)
     {
-        if ($view) {
+        if ($slug) {
             try {
-                $site =  Site::where([['view', $view],
+                $site =  Site::where([['slug', $slug],
                     ['enabled', true]])->first();
             } catch (Exception $exception) {
                 $site = null;
