@@ -4,6 +4,16 @@ use App\Models\Project;
 use App\Models\ProjectsRoute;
 use App\Models\Site;
 
+//default laravel routing
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+//Admin routing
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
 try {
     Project::hostToProject(request()->getHost());
 } catch (Exception $exception) {
@@ -37,9 +47,9 @@ function checkRoutes ($routes_array, $not_found = FALSE) {
                 Route::get($routes_array[$i]['path'], function () {
                     return \App\Http\Controllers\Web\SinglepageController::index(request()->id, request()->view, request()->slug);
                 })->name($routes_array[$i]['view']);
-            } elseif ($routes_array[$i]['controller'] == 'colection') {
+            } elseif ($routes_array[$i]['controller'] == 'collection') {
                 Route::get($routes_array[$i]['path'], function () {
-                    return \App\Http\Controllers\Web\ColectionController::index(request()->id, request()->view, request()->colection);
+                    return \App\Http\Controllers\Web\CollectionController::index(request()->id, request()->view, request()->colection);
                 })->name($routes_array[$i]['view']);
             } elseif ($routes_array[$i]['controller'] == '' && $routes_array[$i]['view'] !='') {
                 Route::get($routes_array[$i]['path'], function () {
@@ -55,12 +65,3 @@ function checkRoutes ($routes_array, $not_found = FALSE) {
 
 }
 
-//default laravel routing
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-//Admin routing
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});

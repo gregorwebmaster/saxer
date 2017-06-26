@@ -12,7 +12,7 @@ use Mockery\Exception;
 
 class SinglePageController extends Controller
 {
-    public static function index($id, $view)
+    public static function index($id, $slug)
     {
 
         if ($id) {
@@ -23,9 +23,13 @@ class SinglePageController extends Controller
                 $template = null;
             }
 
-        } else if ($view){
-            $site = self::findSiteWithView($view);
-            $template = self::getTemplate($view);
+        } else if ($slug){
+//            $site = self::findSiteWithId($id);
+//            if ($site) {
+//                $template = self::getTemplate($site->view);
+//            } else {
+//                $template = null;
+//            }
         } else if (Route::currentRouteName()){
             $site = self::findSiteWithId(Route::currentRouteName());
             $template = self::getTemplate(Route::currentRouteName());
