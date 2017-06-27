@@ -35,10 +35,10 @@ if ($site_routes) {
 
 if (Config::get('custom.project') && !$site_routes) {
     $project_routes = ProjectsRoute::projectRoutes(Config::get('custom.project')->id);
-    checkRoutes($project_routes, TRUE);
+    checkRoutes($project_routes);
 }
 
-function checkRoutes ($routes_array, $not_found = FALSE) {
+function checkRoutes ($routes_array) {
 
     if (is_array($routes_array)) {
         for ($i = 0; $i < count($routes_array); $i++) {
@@ -54,13 +54,8 @@ function checkRoutes ($routes_array, $not_found = FALSE) {
                 Route::get($routes_array[$i]['path'], function () {
                     return \App\Http\Controllers\Web\DefaultController::index();
                 })->name($routes_array[$i]['view']);
-            } elseif ($not_found) {
-                Route::get($routes_array[$i]['path'], function () {
-                    return view('error.404');
-                })->name('not_found');
             }
         }
     }
-
 }
 

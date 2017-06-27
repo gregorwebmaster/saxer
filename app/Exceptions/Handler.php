@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+//use Illuminate\Support\Facades\Config;
 
 class Handler extends ExceptionHandler
 {
@@ -44,7 +45,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        $statusCode = $exception->getStatusCode($exception);
+        $template = config('custom.project')->template;
+
+        if (config('app.debug')) {
+            return parent::render($request, $exception);
+        } else if ($statusCode) {
+            $view = 'errors.' . $statusCode;
+
+            if ($template && view()->exists($template . '.' . $view)) {
+                return response()->view($template . '.' . $view, [], $statusCode);
+            } else {
+                return response()->view($view, [], $statusCode);
+            }
+        } else {
+            return parent::render($request, $exception);
+        }
+
     }
 
     /**

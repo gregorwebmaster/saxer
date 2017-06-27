@@ -14,33 +14,39 @@ class SinglePageController extends Controller
 {
     public static function index($id, $slug)
     {
-
         if ($id) {
             $site = self::findSiteWithId($id);
             if ($site) {
-                $template = self::getTemplate($site->view);
+                $view = self::getTemplate($site->view);
             } else {
-                $template = null;
+                $view = null;
             }
-
         } else if ($slug){
             $site = self::findSiteWithSlug($slug);
             if ($site) {
-                $template = self::getTemplate($site->view);
+                $view = self::getTemplate($site->view);
             } else {
-                $template = null;
+                $view = null;
             }
         } else if (Route::currentRouteName()){
             $site = self::findSiteWithId(Route::currentRouteName());
-            $template = self::getTemplate(Route::currentRouteName());
+            $view = self::getTemplate(Route::currentRouteName());
         } else {
-            $template = null;
+            $view = null;
         }
 
-        if ($template){
-            return self::createView($template, $site);
+        if ($view && view()->exists($view)) {
+            return self::createView($view, $site);
+        } else if ($view && !view()->exists($view)) {
+            return self::createView(self::getTemplate('site'), $site);
         } else {
-            return 'not found';
+            $template = config('custom.project')->template;
+            $view = 'errors.404';
+            if ($template && view()->exists($template . '.' . $view)) {
+                return response()->view($template . '.' . $view, [], 404);
+            } else {
+                return response()->view($view, [], 404);
+            }
         }
 
     }
