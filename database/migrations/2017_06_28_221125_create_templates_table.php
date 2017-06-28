@@ -18,7 +18,7 @@ class CreateTemplatesTable extends Migration
             $table->integer('projects_id')->unsigned();
             $table->timestampsTz();
 
-            $table->unique(['name', 'sites_id']);
+            $table->unique(['name', 'projects_id']);
             $table->foreign('projects_id')->references('id')->on('projects');
         });
     }
