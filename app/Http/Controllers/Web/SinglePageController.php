@@ -21,14 +21,14 @@ class SinglePageController extends Controller
             } else {
                 $view = null;
             }
-        } else if ($slug){
+        } elseif ($slug){
             $site = self::findSiteWithSlug($slug);
             if ($site) {
                 $view = self::getTemplate($site->view);
             } else {
                 $view = null;
             }
-        } else if (Route::currentRouteName()){
+        } elseif (Route::currentRouteName()){
             $site = self::findSiteWithId(Route::currentRouteName());
             $view = self::getTemplate(Route::currentRouteName());
         } else {
@@ -37,7 +37,7 @@ class SinglePageController extends Controller
 
         if ($view && view()->exists($view)) {
             return self::createView($view, $site);
-        } else if ($view && !view()->exists($view)) {
+        } elseif ($view && !view()->exists($view)) {
             return self::createView(self::getTemplate('site'), $site);
         } else {
             $template = config('custom.project')->template;
@@ -48,7 +48,6 @@ class SinglePageController extends Controller
                 return response()->view($view, [], 404);
             }
         }
-
     }
 
     private static function getTemplate ($view)
