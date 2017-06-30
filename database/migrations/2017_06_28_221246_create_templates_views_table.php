@@ -16,6 +16,7 @@ class CreateTemplatesViewsTable extends Migration
         Schema::create('templates_views', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',30);
+            $table->string('img')->nullable();
             $table->integer('templates_id')->unsigned();
             $table->timestampsTz();
 

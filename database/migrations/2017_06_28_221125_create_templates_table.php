@@ -14,12 +14,16 @@ class CreateTemplatesTable extends Migration
     public function up()
     {
         Schema::create('templates', function (Blueprint $table) {
-            $table->increments('id');$table->string('name',30);
-            $table->integer('projects_id')->unsigned();
+            $table->increments('id');
+            $table->string('name',30);
+            $table->string('description')->nullable();
+            $table->string('directory');
+            $table->string('img')->nullable();
+            $table->integer('services_id')->unsigned();
             $table->timestampsTz();
 
-            $table->unique(['name', 'projects_id']);
-            $table->foreign('projects_id')->references('id')->on('projects');
+            $table->unique(['name', 'services_id']);
+            $table->foreign('services_id')->references('id')->on('services');
         });
     }
 
