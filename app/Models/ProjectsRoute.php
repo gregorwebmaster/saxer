@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Route extends Model
+class ProjectsRoute extends Model
 {
-
     protected $fillable = [
-        'projects_id', 'routes_roles_id'
+        'projects_id', 'path', 'name', 'controller', 'view'
     ];
 
 
@@ -22,16 +21,13 @@ class Route extends Model
         $routes = [];
 
         foreach ($db_query as $result) {
-            $routes_role = RoutesRole::where('id', $result->routes_roles_id)->firstOrFail();
+            $rule = ['path' => $result->path,
+                'controller' => $result->controller,
+                'name' => $result->name,
+                'view' => $result->view
+            ];
 
-            if ($routes_role) {
-                $rule = ['path' => $result->path,
-                    'controller' => $routes_role->controller,
-                    'name' => $routes_role->name
-                ];
-
-                array_push($routes, $rule);
-            }
+            array_push($routes, $rule);
         }
         return $routes;
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Models\Web\Site;
+use App\Models\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
@@ -12,33 +12,42 @@ use Mockery\Exception;
 
 class SinglePageController extends Controller
 {
-    public static function index($id, $view)
+    public static function index($id, $slug)
     {
-
         if ($id) {
             $site = self::findSiteWithId($id);
             if ($site) {
-                $template = self::getTemplate($site->view);
+                $view = self::getTemplate($site->view);
             } else {
-                $template = null;
+                $view = null;
             }
-
-        } else if ($view){
-            $site = self::findSiteWithView($view);
-            $template = self::getTemplate($view);
-        } else if (Route::currentRouteName()){
+        } elseif ($slug){
+            $site = self::findSiteWithSlug($slug);
+            if ($site) {
+                $view = self::getTemplate($site->view);
+            } else {
+                $view = null;
+            }
+        } elseif (Route::currentRouteName()){
             $site = self::findSiteWithId(Route::currentRouteName());
-            $template = self::getTemplate(Route::currentRouteName());
+            $view = self::getTemplate(Route::currentRouteName());
         } else {
-            $template = null;
+            $view = null;
         }
 
-        if ($template){
-            return self::createView($template, $site);
+        if ($view && view()->exists($view)) {
+            return self::createView($view, $site);
+        } elseif ($view && !view()->exists($view)) {
+            return self::createView(self::getTemplate('site'), $site);
         } else {
-            return 'not found';
+            $template = config('custom.project')->template;
+            $view = 'errors.404';
+            if ($template && view()->exists($template . '.' . $view)) {
+                return response()->view($template . '.' . $view, [], 404);
+            } else {
+                return response()->view($view, [], 404);
+            }
         }
-
     }
 
     private static function getTemplate ($view)
@@ -67,11 +76,11 @@ class SinglePageController extends Controller
         return $site;
     }
 
-    private static function findSiteWithView($view =null)
+    private static function findSiteWithSlug($slug =null)
     {
-        if ($view) {
+        if ($slug) {
             try {
-                $site =  Site::where([['view', $view],
+                $site =  Site::where([['slug', $slug],
                     ['enabled', true]])->first();
             } catch (Exception $exception) {
                 $site = null;
