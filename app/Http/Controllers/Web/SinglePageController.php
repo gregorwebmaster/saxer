@@ -12,7 +12,8 @@ use Mockery\Exception;
 
 class SinglePageController extends Controller
 {
-    public static function index($id, $slug)
+
+    public static function index($id=null, $slug=null)
     {
         if ($id) {
             $site = self::findSiteWithId($id);
@@ -40,7 +41,7 @@ class SinglePageController extends Controller
         } elseif ($view && !view()->exists($view)) {
             return self::createView(self::getTemplate('site'), $site);
         } else {
-            $template = config('custom.project')->template;
+            $template =  self::getTemplateDir(Config::get('custom.project')->template);
             $view = 'errors.404';
             if ($template && view()->exists($template . '.' . $view)) {
                 return response()->view($template . '.' . $view, [], 404);
@@ -52,7 +53,7 @@ class SinglePageController extends Controller
 
     private static function getTemplate ($view)
     {
-        return Config::get('custom.project')->template . '.' . $view;
+        return self::getTemplateDir(Config::get('custom.project')->template).'.'.$view; //Config::get('custom.project')->template . '.' . $view;
     }
 
     private static function createView ($template, $site) {
@@ -89,5 +90,11 @@ class SinglePageController extends Controller
             $site = null;
         }
         return $site;
+    }
+
+    private static function getTemplateDir($template_id)
+    {
+        $template = \App\Models\Template::where('id', 1)->first();
+        return $template->directory;
     }
 }

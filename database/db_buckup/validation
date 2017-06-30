@@ -1,0 +1,75 @@
+{
+    "relationship": {
+        "key": "id",
+        "label": "name"
+    }
+}
+
+{
+    "on": "enabled",
+    "off": "disabled",
+    "checked": ""
+}
+
+{
+    "default": "singlepage",
+    "options": {
+        "singlepage": "singlepage",
+        "collection": "collection"
+    }
+}
+
+{
+    "validation": {
+        "rule": "required|max:30",
+        "messages": {
+            "required": "Field :attribute is a required.",
+            "max": "This field will have maximum :max letters."
+        }
+    }
+}
+
+{
+    "validation": {
+        "rule": "required|max:16777215 ",
+        "messages": {
+            "required": "Field :attribute is a required.",
+            "max": "This field will have maximum :max letters."
+        }
+    }
+}
+
+{
+    "validation": {
+        "rule": "max:30",
+        "messages": {
+            "max": "This field will have maximum :max letters."
+        }
+    }
+}
+
+{
+    "resize": {
+        "width": "1000",
+        "height": "null"
+    },
+    "quality": "70%",
+    "upsize": true,
+    "thumbnails": [
+        {
+            "name": "medium",
+            "scale": "50%"
+        },
+        {
+            "name": "small",
+            "scale": "25%"
+        },
+        {
+            "name": "cropped",
+            "crop": {
+                "width": "300",
+                "height": "250"
+            }
+        }
+    ]
+}

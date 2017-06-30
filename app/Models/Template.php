@@ -10,4 +10,5 @@ class Template extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
 }

@@ -45,22 +45,22 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $statusCode = $exception->getStatusCode($exception);
-        $template = config('custom.project')->template;
+//        $statusCode = $exception->getStatusCode($exception);
+//        $template = config('custom.project')->template;
 
-        if (config('app.debug')) {
+//        if (config('app.debug')) {
+//            return parent::render($request, $exception);
+//        } else if ($statusCode) {
+//            $view = 'errors.' . $statusCode;
+//
+//            if ($template && view()->exists($template . '.' . $view)) {
+//                return response()->view($template . '.' . $view, [], $statusCode);
+//            } else {
+//                return response()->view($view, [], $statusCode);
+//            }
+//        } else {
             return parent::render($request, $exception);
-        } else if ($statusCode) {
-            $view = 'errors.' . $statusCode;
-
-            if ($template && view()->exists($template . '.' . $view)) {
-                return response()->view($template . '.' . $view, [], $statusCode);
-            } else {
-                return response()->view($view, [], $statusCode);
-            }
-        } else {
-            return parent::render($request, $exception);
-        }
+//        }
 
     }
 

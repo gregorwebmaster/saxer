@@ -6,7 +6,7 @@ use App\Models\Site;
 
 //default laravel routing
 //Route::get('/', function () {
-//    return view('welcome');
+//    return \App\Http\Controllers\Web\SinglePageController::index(request()->id, request()->slug);
 //});
 
 //Admin routing
@@ -29,11 +29,12 @@ if (Config::get('custom.project')) {
 } else {
     $site_routes =  FALSE;
 }
+
 if ($site_routes) {
     checkRoutes($site_routes);
 }
 
-if (Config::get('custom.project') && !$site_routes) {
+if (Config::get('custom.project')) {
     $project_routes = ProjectsRoute::projectRoutes(Config::get('custom.project')->id);
     checkRoutes($project_routes);
 }
@@ -44,7 +45,7 @@ function checkRoutes ($routes_array) {
         for ($i = 0; $i < count($routes_array); $i++) {
             if ($routes_array[$i]['controller'] == 'singlepage') {
                 Route::get($routes_array[$i]['path'], function () {
-                    return \App\Http\Controllers\Web\SinglepageController::index(request()->id, request()->slug);
+                    return \App\Http\Controllers\Web\SinglePageController::index(request()->id, request()->slug);
                 })->name($routes_array[$i]['view']);
             } elseif ($routes_array[$i]['controller'] == 'collection') {
                 Route::get($routes_array[$i]['path'], function () {
