@@ -2381,6 +2381,7 @@ class ComposerStaticInitbab7c3440fa4d08ae35d859f95d3c923
         'Mockery\\VerificationDirector' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationDirector.php',
         'Mockery\\VerificationExpectation' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
         'ModifityProjectsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_29_230419_modifity_projects_table.php',
+        'Modify2ServicesTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_30_083344_modify-2_services_table.php',
         'ModifyProjectsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_30_065708_modify_projects_table.php',
         'ModifyServicesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_30_065536_modify_services_table.php',
         'Monolog\\ErrorHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ErrorHandler.php',

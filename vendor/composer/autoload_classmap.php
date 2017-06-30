@@ -2017,6 +2017,7 @@ return array(
     'Mockery\\VerificationDirector' => $vendorDir . '/mockery/mockery/library/Mockery/VerificationDirector.php',
     'Mockery\\VerificationExpectation' => $vendorDir . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
     'ModifityProjectsTable' => $baseDir . '/database/migrations/2017_05_29_230419_modifity_projects_table.php',
+    'Modify2ServicesTable' => $baseDir . '/database/migrations/2017_06_30_083344_modify-2_services_table.php',
     'ModifyProjectsTable' => $baseDir . '/database/migrations/2017_05_30_065708_modify_projects_table.php',
     'ModifyServicesTable' => $baseDir . '/database/migrations/2017_05_30_065536_modify_services_table.php',
     'Monolog\\ErrorHandler' => $vendorDir . '/monolog/monolog/src/Monolog/ErrorHandler.php',
