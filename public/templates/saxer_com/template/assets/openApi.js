@@ -6,6 +6,8 @@ OpenAPI.prototype.getendpoint = function (action, data) {
     data = data || '';
     if (action == 'projectSettings') {
         return this.openApiUrl + 'getprojectsettings/' + data;
+    } else if (action == 'getsitesmodules') {
+        return this.openApiUrl + 'getsitesmodules/'+ data;
     } else if (action == 'custom') {
         return this.openApiUrl + data;
     }
@@ -33,5 +35,12 @@ OpenAPI.prototype.getProjectSettings = function(id) {
     var id = id || 0;
 
         var endpoint = this.getendpoint('projectSettings', id);
+        return this.makeCall(endpoint);
+}
+
+OpenAPI.prototype.getSiteModules = function(id) {
+    var id = id || 0;
+
+        var endpoint = this.getendpoint('getsitesmodules', id);
         return this.makeCall(endpoint);
 }

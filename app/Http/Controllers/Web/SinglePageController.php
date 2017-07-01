@@ -94,7 +94,7 @@ class SinglePageController extends Controller
 
     private static function getTemplateDir($template_id)
     {
-        $template = \App\Models\Template::where('id', 1)->first();
+        $template = \App\Models\Template::where('id', $template_id)->first();
         return $template->directory;
     }
 }

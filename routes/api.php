@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+//openAPI routing
+Route::group(['prefix' => 'openapi'], function () {
+    Route::get('getprojectsettings/{id}', function () {
+        return 'hello';
+//        return \App\Http\Controllers\Web\SinglePageController::index(request()->id, request()->slug);
+    });
+});

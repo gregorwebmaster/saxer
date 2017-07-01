@@ -14,6 +14,16 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
+//openAPI routing
+Route::group(['prefix' => 'openapi'], function () {
+    Route::get('getprojectsettings/{id}', function ($id) {
+        return \App\Http\Controllers\Api\OpenApiController::getProjectSettings($id);
+    });
+    Route::get('getsitesmodules/{id}', function ($id) {
+        return \App\Http\Controllers\Api\OpenApiController::getSiteModules($id);
+    });
+});
+
 try {
     Project::hostToProject(request()->getHost());
 } catch (Exception $exception) {
