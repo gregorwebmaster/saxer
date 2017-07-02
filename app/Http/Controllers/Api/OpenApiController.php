@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Helpers\ResponsiveRoutingController;
 use App\Models\ProjectsSetting;
 use App\Models\SitesModules;
 use Illuminate\Http\Request;
@@ -22,8 +23,10 @@ class OpenApiController extends Controller
 
     public static function getSiteModules($id)
     {
+        $device = ResponsiveRoutingController::getResponsiveView();
         $dane = SitesModules::where('sites_id', $id)
             ->where('enabled', true)
+            ->where('rwd_' . $device, true)
             ->orderBy('order')
             ->get();
         $results = [];

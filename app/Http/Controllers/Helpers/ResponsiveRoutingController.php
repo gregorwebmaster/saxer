@@ -8,18 +8,14 @@ use Jenssegers\Agent\Agent as MobileDetector;
 
 class ResponsiveRoutingController extends Controller
 {
-    private $responsive;
 
-    public function __construct()
+    public static function getResponsiveView()
     {
-        $this->responsive = new MobileDetector;
-    }
+        $responsive = new MobileDetector;
 
-    public function getResponsiveView()
-    {
-        if ($this->responsive->isTablet()) {
+        if ($responsive->isTablet()) {
             $device = 'tablet';
-        } elseif ($this->responsive->isMobile()) {
+        } elseif ($responsive->isMobile()) {
             $device = 'mobile';
         } else {
             $device = 'desktop';
