@@ -1,0 +1,10 @@
+{
+  "/js/app.js": "/js/app.js",
+  "/css/app.css": "/css/app.css",
+  "/mix.js": "/mix.js",
+  "/resources/assets/build/app.js": "/resources/assets/build/app.js",
+  "/resources/assets/js/build.js": "/resources/assets/js/build.js",
+  "/resources/assets/js/build/app.js": "/resources/assets/js/build/app.js",
+  "/build/app.js": "/build/app.js",
+  "/../resources/build/app.js": "/../resources/build/app.js"
+}
